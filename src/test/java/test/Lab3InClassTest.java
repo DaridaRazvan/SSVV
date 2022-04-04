@@ -16,12 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class Lab3InClassTest {
 
-    @Before
-    public void delete(){
-        //TemaValidator temaValidator = new TemaValidator();
-        //TemaXMLRepository fileRepository = new TemaXMLRepository(temaValidator, "temaTest.xml");
-        //fileRepository.delete("1");
-    }
 
     @Test
     public void addAssignmentValid(){
@@ -36,13 +30,38 @@ public class Lab3InClassTest {
     }
 
     @Test
-    public void addAssignmentInvalid(){
+    public void addAssignmentInvalidId(){
+        TemaValidator temaValidator = new TemaValidator();
+        TemaXMLRepository fileRepository = new TemaXMLRepository(temaValidator, "temaTest.xml");
+
+        Tema tema = new Tema(null, "description", 7, 5);
+        assertNull(fileRepository.save(tema));
+    }
+
+    @Test
+    public void addAssignmentInvalidStartLineTooBig(){
         TemaValidator temaValidator = new TemaValidator();
         TemaXMLRepository fileRepository = new TemaXMLRepository(temaValidator, "temaTest.xml");
 
         Tema tema = new Tema("2", "description", 7, 20);
-        //Exception exception = assertThrows(ValidationException.class,
-        //        () ->fileRepository.save(tema));
+        assertNull(fileRepository.save(tema));
+    }
+
+    @Test
+    public void addAssignmentInvalidEndLine(){
+        TemaValidator temaValidator = new TemaValidator();
+        TemaXMLRepository fileRepository = new TemaXMLRepository(temaValidator, "temaTest.xml");
+
+        Tema tema = new Tema("2", "description", -3, 2);
+        assertNull(fileRepository.save(tema));
+    }
+
+    @Test
+    public void addAssignmentInvalidDescription(){
+        TemaValidator temaValidator = new TemaValidator();
+        TemaXMLRepository fileRepository = new TemaXMLRepository(temaValidator, "temaTest.xml");
+
+        Tema tema = new Tema("2", "", 7, 5);
         assertNull(fileRepository.save(tema));
     }
 }
