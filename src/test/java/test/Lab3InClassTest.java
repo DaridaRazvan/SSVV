@@ -4,15 +4,12 @@ import domain.Nota;
 import domain.Tema;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import repository.TemaXMLRepository;
 import validation.NotaValidator;
 import validation.TemaValidator;
 import validation.ValidationException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.Assert.*;
 
 public class Lab3InClassTest {
 
